@@ -35,6 +35,7 @@ function changeSong (index) {
   song.src = songs[index].url
   song.addEventListener('loadeddata', function () {})
   playSong()
+  iconControl.classList.replace('bi-pause-fill', 'bi-play-fill')
 }
 
 function playSong () {
@@ -75,7 +76,7 @@ forward.addEventListener('click', () => {
 })
 
 rewind.addEventListener('click', () => {
-  if (progress.value !== song.duration) {
+  if (progress.value > 5) {
     progress.value = 0
     song.currentTime = progress.value
   } else {
@@ -83,7 +84,8 @@ rewind.addEventListener('click', () => {
       indexSong--
       changeSong(indexSong)
     } else {
-      changeSong(songs.length - 1)
+      indexSong = songs.length - 1
+      changeSong(indexSong)
     }
   }
 })
